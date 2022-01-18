@@ -1,7 +1,6 @@
 package tfip.modserver.librarysearch.controller;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,8 +24,6 @@ public class SearchController {
 
         HashMap<String, String> results = bookService.search(search.strip());
 
-
-        // results.forEach((k,v) -> System.out.println(k +" " + v));
         model.addAttribute("results", results);
         model.addAttribute("searchterm", search);
 

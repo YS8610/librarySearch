@@ -3,10 +3,9 @@ package tfip.modserver.librarysearch.service;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.http.MediaType;
@@ -60,4 +59,31 @@ public class BookService {
         
         return results;
     } 
+
+    public HashMap<String,String> getBookDetail(String workid){
+        HashMap<String,String> bookDetails = new HashMap<>();
+        RestTemplate template = new RestTemplate();
+        String url = "https://openlibrary.org/works/" + workid+".json";
+        
+        RequestEntity<Void> req = RequestEntity.get(url)
+            .accept(MediaType.APPLICATION_JSON)
+            .build();
+        ResponseEntity<String> resp = template.exchange(req, String.class);
+        
+        try( InputStream inputStream = new ByteArrayInputStream(resp.getBody().getBytes()) ){
+            JsonReader reader = Json.createReader(inputStream);
+            JsonObject data = reader.readObject();
+            // Optional<String> excerpt = Optional.ofNullable(data.getString("excerpt"));
+
+            bookDetails.put("title",data.getString("title"));
+            bookDetails.put("description",data.getString("description"));
+            // bookDetails.put("Excerpt",excerpt.orElse("no excerpt can be found"));
+
+            return bookDetails;
+        }
+        catch (IOException e){
+            logger.warning("getBookDetail IOException in reading json");
+        }
+        return bookDetails;
+    }
 }

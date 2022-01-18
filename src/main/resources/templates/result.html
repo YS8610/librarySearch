@@ -9,7 +9,7 @@
 <body>
     <h1 th:text="|Search result for '${searchterm}'|">Search Result</h1>
     <ol>
-        <li th:each= "result: ${results.keySet()}" ><a th:href="@{'/book'}+${result.substring(5)}" th:text = "${results.get(result)}">book result</a></li>
+        <li th:each= "result: ${results.keySet()}" ><a th:href="@{'/book'}+${result.substring(6)}" th:text = "${results.get(result)}">book result</a></li>
     </ol>
     <a href="/">Back</a>
 </body>
