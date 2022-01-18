@@ -68,6 +68,7 @@ public class BookService {
             JsonObject data = reader.readObject();
             
             String excerpt;
+            String stringDescription;
 
             try {
                 JsonObject excerptObj = data.getJsonArray("excerpts").getJsonObject(0);
@@ -77,8 +78,15 @@ public class BookService {
                 excerpt = "Excerpt is not written yet...";
             }
 
+            try {
+                stringDescription = data.getString("description");
+
+            } catch (NullPointerException e) {
+                stringDescription = "description is not written yet...";
+            }
+
             bookDetails.put("title",data.getString("title"));
-            bookDetails.put("description",data.getString("description"));
+            bookDetails.put("description",stringDescription);
             bookDetails.put("excerpt", excerpt);
             return bookDetails;
         }
