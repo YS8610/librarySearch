@@ -23,8 +23,8 @@ public class SearchController {
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
     public String searchBook(@RequestParam(required = true) String search, Model model) {
 
-        HashMap<String, String> results = bookService.search(search);
-        
+        HashMap<String, String> results = bookService.search(search.strip());
+
 
         // results.forEach((k,v) -> System.out.println(k +" " + v));
         model.addAttribute("results", results);

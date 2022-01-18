@@ -41,7 +41,7 @@ public class BookService {
         try( InputStream inputStream = new ByteArrayInputStream(resp.getBody().getBytes()) ){
             JsonReader reader = Json.createReader(inputStream);
             JsonObject data = reader.readObject();
-            int resultNumber = data.getInt("numFound");
+            // int resultNumber = data.getInt("numFound");
             JsonArray searchArray = data.getJsonArray("docs");
             // String a = searchArray.toString();
             List<JsonObject> keyandTitle = searchArray.stream()
