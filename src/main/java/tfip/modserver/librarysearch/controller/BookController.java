@@ -45,6 +45,7 @@ public class BookController {
         String a = bookDetail.get("description");
         model.addAttribute("title", bookDetail.get("title"));
         model.addAttribute("Description", bookDetail.get("description"));
+        model.addAttribute("excerpt", bookDetail.get("excerpt"));
         model.addAttribute("cache", cached? "Yes":"no");
 
 

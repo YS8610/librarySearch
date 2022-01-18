@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.http.MediaType;
@@ -24,8 +23,9 @@ public class BookService {
     private final String api = "https://openlibrary.org/search.json?fields=title,key&limit=20";
     Logger logger = Logger.getLogger(BookService.class.getName());
 
-    public HashMap<String, String> search(String searchTerm){
 
+
+    public HashMap<String, String> search(String searchTerm){
         HashMap<String,String> results = new HashMap<>();
         RestTemplate template = new RestTemplate();
         String url = api + "&q=" + searchTerm;
@@ -73,11 +73,22 @@ public class BookService {
         try( InputStream inputStream = new ByteArrayInputStream(resp.getBody().getBytes()) ){
             JsonReader reader = Json.createReader(inputStream);
             JsonObject data = reader.readObject();
-            // Optional<String> excerpt = Optional.ofNullable(data.getString("excerpt"));
+            
+            String excerpt;
+
+            try {
+                JsonObject excerptObj = data.getJsonArray("excerpts").getJsonObject(0);
+                excerpt = excerptObj.getString("excerpt");
+
+            } catch (NullPointerException e) {
+                excerpt = "Excerpt is not written yet...";
+            }
 
             bookDetails.put("title",data.getString("title"));
             bookDetails.put("description",data.getString("description"));
+            bookDetails.put("excerpt", excerpt);
             // bookDetails.put("Excerpt",excerpt.orElse("no excerpt can be found"));
+
 
             return bookDetails;
         }

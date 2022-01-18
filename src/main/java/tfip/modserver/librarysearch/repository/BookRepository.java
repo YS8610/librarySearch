@@ -36,6 +36,7 @@ public class BookRepository {
         JsonObject bookJson = Json.createObjectBuilder()
             .add("title", bookDetail.get("title"))
             .add("Description", bookDetail.get("description"))
+            .add("excerpt",bookDetail.get("excerpt"))
             .build();
             
             template.opsForValue().set(id,bookJson.toString(),10, TimeUnit.MINUTES);
@@ -51,6 +52,8 @@ public class BookRepository {
 
         bookDetail.put("title", jsonParser(jsonString,"title"));
         bookDetail.put("description", jsonParser(jsonString,"description"));
+        bookDetail.put("excerpt", jsonParser(jsonString,"excerpt"));
+
 
         return bookDetail;
     }
