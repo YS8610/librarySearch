@@ -7,9 +7,9 @@
     <title>Result</title>
 </head>
 <body>
-    <h1 th:text="|Search result for |">Search Result</h1>
+    <h1 th:text="|Search result for '${searchterm}'|">Search Result</h1>
     <ol>
-        <li></li>
+        <li th:each= "result: ${results.keySet()}" th:text = "${results.get(result)}"></li>
     </ol>
     <a href="/">Back</a>
 </body>
