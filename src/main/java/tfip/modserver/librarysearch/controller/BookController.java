@@ -47,7 +47,6 @@ public class BookController {
         model.addAttribute("excerpt", bookDetail.get("excerpt"));
         model.addAttribute("cache", cached? "Yes":"no");
 
-
         } catch (Exception e) {
             logger.info("fail to get info for book detail in bookcontrollers");
         }
