@@ -42,7 +42,6 @@ public class BookController {
                 bookRepo.save(id, bookDetail);
             }
         
-        String a = bookDetail.get("description");
         model.addAttribute("title", bookDetail.get("title"));
         model.addAttribute("Description", bookDetail.get("description"));
         model.addAttribute("excerpt", bookDetail.get("excerpt"));
