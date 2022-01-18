@@ -54,7 +54,6 @@ public class BookRepository {
         bookDetail.put("description", jsonParser(jsonString,"description"));
         bookDetail.put("excerpt", jsonParser(jsonString,"excerpt"));
 
-
         return bookDetail;
     }
 }

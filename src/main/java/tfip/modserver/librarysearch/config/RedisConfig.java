@@ -38,7 +38,7 @@ public class RedisConfig {
             pw = k;
         }
         else{
-            pw = "";
+            pw = "LOiXqVXqwZtNsJQY72PLHLgX1KixMpGf";
         }
 
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
